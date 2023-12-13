@@ -1,0 +1,54 @@
+.nav-width{
+    width: 82rem;
+    background-color: black;
+    color: aliceblue;
+    font-size: 1.3rem;
+    font-weight: bolder;
+
+}
+.container-frame{
+    margin-top: 2rem;
+    /* margin-left: 20rem; */
+}
+.container-frame h2{
+    margin-left: 28rem;
+}
+.container-frame p{
+    margin-left: 28rem;
+    font-weight: bolder;
+    color: rgb(54, 52, 52);
+}
+.user-del{
+    margin-top: 2rem;
+    margin-left: 28rem;
+}
+
+.article1{
+    display: flex;
+    width: 27rem;
+    cursor: pointer;
+}
+.border-line{
+    
+    border-bottom: 1px solid rgb(24, 22, 22);
+}
+.arrow-sign{
+    margin-left: 20rem;
+    width: 20px;
+}
+.border-line{
+    border-bottom: 1px solid grey;
+}
+.article2{
+    display: flex;
+    /* width: 30rem; */
+    cursor: pointer;
+}
+.arrow-sign1{
+    margin-left: 16.3rem;
+    width: 20px;
+}
+.arrow-sign2{
+    margin-left: 21.3rem;
+    width: 20px;
+}

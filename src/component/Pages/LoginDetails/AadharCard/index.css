@@ -1,0 +1,22 @@
+.aadhar-frame{
+    margin: 1rem;
+    margin-left: 30rem;
+}
+.aadhar-icon{
+    margin-top: 3rem;
+}
+.aahdar-num{
+    margin-top: 1rem;
+    display: grid;
+}
+.input-number{
+    width: 25rem;
+}
+.next-btn-aadhar{
+    margin-top: 1rem;
+    width: 25rem;
+    background-color: black;
+    padding: 0.3rem;
+    color: aliceblue;
+    font-weight: bolder;
+}

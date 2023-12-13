@@ -1,0 +1,125 @@
+.main-car-contact{
+    margin-top: 3rem;
+    
+}
+.form-field{
+    display: grid;
+    width: 30rem;
+  margin-left: 3rem;
+}
+
+.input-control{
+  width: 15rem;
+}
+
+.form-field2{
+  margin-top: -0.5rem;
+  display: grid;
+}
+input[type="text"],input[type="date"],input[type="number"]{
+  padding: 1rem;
+}
+
+
+/* file upload */
+#picture__input {
+    display: none;
+  }
+  #multi-image{
+    display: none;
+  }
+  
+  .picture {
+    width: 200px;
+    height: 100px;
+    aspect-ratio: 16/9;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    border: 2px dashed currentcolor;
+    cursor: pointer;
+    font-family: sans-serif;
+    transition: color 300ms ease-in-out, background 300ms ease-in-out;
+    outline: none;
+    margin: 0.3rem;
+    /* overflow: hidden; */
+  }
+  
+  /* .picture:hover {
+    color: white;
+    background: #f05d64;
+  }
+  
+  .picture:active {
+    border-color: turquoise;
+    color: turquoise;
+    background: white;
+  }
+  
+  .picture:focus {
+    color: white;
+    background: #f6fff6;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  } */
+.head{
+  margin-left: 8rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgb(184, 177, 177);
+  width: 35%;
+}
+  .picture__img {
+   width: 50rem;
+   height: 6rem;
+  }
+  .my-frame-form{
+    display: flex;
+    margin-left: 0%;
+  }
+  .img-title{
+    margin-left: 4rem;
+    border-bottom: 1px solid rgb(204, 201, 201);
+    width: 65%;
+  }
+  .image-upload{
+    display: flex;
+    margin-left: 4rem;
+  }
+  .mul-pic-container{
+    display: inline-flex;
+  }
+  .multi_picture{
+    width: 10rem;
+    margin-left: 1rem;
+  }
+  .multi_picture:focus{
+    background: #f6fff6;
+    box-shadow:  0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  .multi-tab{
+    width: 80%;
+  }
+  .btn-add{
+    padding: 0.3rem;
+    width: 30rem;
+    background: #f33f3f;
+    border: none;
+    color:white;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5rem;
+  }
+  .date-input{
+    padding-top: -1rem;
+  }
+  .input{
+    width: 20rem;
+  }
+  .image-line{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.3rem;
+    margin: 0.2rem;
+  }

@@ -1,0 +1,39 @@
+.maintant-frame {
+    /* border: 1px solid black; */
+    background-color: rgb(253, 250, 250);
+    margin-left: 25%;
+    width: 50%;
+}
+
+.maintant-frame p {
+    font-weight: bolder;
+    margin-top: 1rem;
+    color: black;
+    font-size: 19px;
+    /* width: 76%; */
+}
+
+.img-back {
+    /* margin-left: 20rem; */
+    width: 40rem;
+    /* height: 35rem; */
+}
+
+.btn-phone {
+    margin-top: 0.4rem;
+    /* margin-left: 20rem; */
+    width: 40rem;
+    padding: 0.5rem;
+    color: #efefef;
+    background-color: black;
+    font-weight: bolder;
+}
+
+.btn-google {
+    margin-top: 0.3rem;
+    /* margin-left: 20rem; */
+    padding: 0.5rem;
+    width: 40rem;
+    border: none;
+    background-color: #ddd9d9;
+}

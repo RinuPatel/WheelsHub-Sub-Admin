@@ -1,0 +1,38 @@
+.profile-photo{
+    margin: 2rem;
+    margin-left: 30rem;
+    /* background-color: bisque ; */
+}
+.profile-photo h2{
+    margin-top: 2rem;
+}
+.avtar{
+    margin-top: 3rem;
+    margin-left: 5rem;
+    width: 9rem;
+}
+.upload-lable{
+    margin-top: 7rem;
+    border: 1px solid black;
+    padding: 0.4rem;
+    width: 20rem;
+    text-align: center;
+    background-color: black;
+    color: aliceblue;
+    font-weight: bold;
+}
+.image-profile{
+    margin-top: 2rem;
+    margin-left: 5rem;
+    width: 10rem;
+    height: 10rem;
+}
+.next-btn-profile{
+    width: 20rem;
+    color: aliceblue;
+    background-color: black;
+    padding: 0.2rem;
+    font-weight: bold;
+    border: none;
+    font-size: large;
+}
