@@ -1,15 +1,20 @@
 import { Link } from "react-router-dom";
 import './index.css'
-import { useState ,useRef} from "react";
-import Cropper from 'react-cropper';
+import { useState, useRef } from "react";
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 
-const ProfilePhoto = () => {
+const ProfilePhoto = (props) => {
+    const Navigate = useNavigate();
     const [image, setImage] = useState(null);
     const [cropData, setCropData] = useState(null);
     const cropperRef = useRef(null);
+    const [imageFile, setImageFile] = useState("")
+    const [sucess, setSucess] = useState(false)
 
     const handalerImage = (e) => {
         const file = e.target.files[0];
+        setImageFile(file)
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -18,19 +23,58 @@ const ProfilePhoto = () => {
             reader.readAsDataURL(file)
         }
 
-        
+        console.log("upload image===>", file);
+
     }
     const handleCrop = () => {
         if (cropperRef.current) {
-          setCropData(cropperRef.current.getCroppedCanvas().toDataURL());
+            setCropData(cropperRef.current.getCroppedCanvas().toDataURL());
         }
-      };
+    };
+    const token = Cookies.get("jwt")
+    const handelImageUpload = async (e) => {
+        try {
+            const formData = new FormData()
+            formData.append('image', imageFile)
+            const res = await fetch("http://localhost:8000/api/v1/update-user", {
+                method: 'PATCH',
+                body: formData,
+                headers: {
+                    token: token
+                }
+            })
+            const data = await res.json();
+            console.log("Api res===>", data);
+            if (data.status === 200) {
+                // props.onProfileSuccess();
+                localStorage.setItem("isProfilePhoto",true)
+                setSucess(true)
+                setTimeout(() => {
+                    setSucess(false)
+                    Navigate("/user-detail")
+                }, 2000);
+            }else{
+               alert("try again"); 
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <>
-            <nav className='navber nav-width'>
+
+             <nav className='navber nav-width'>
                 <Link to="" className='nav-link'>CarRentZone</Link>
-            </nav>
+            </nav> 
             <div className="profile-photo">
+                {sucess && (
+
+                    <div className="popup w3-animate-top">
+                        <span class="popuptext" id="myPopup">Succefully upload 👍!</span>
+                    </div>
+                    
+                )}
+
                 <Link to="/user-detail" className="upload"><img src="myImage/arrow back.svg" alt="" /></Link>
                 <h2>Upload Profile Photo</h2>
                 <span>Click Button And Upload Here Your Profile Photo</span>
@@ -38,21 +82,6 @@ const ProfilePhoto = () => {
                     {image ?
                         <div>
                             <img src={image} alt="not found" className="image-profile" />
-                            {/* <p>Preview</p> */}
-                            {/* <Cropper
-                                // ref={cropperRef}
-                                src={image}
-                                style={{ height: 400, width: '100%' }}
-                                aspectRatio={16 / 9}  // You can set the aspect ratio as per your requirement
-                                guides={true}
-                                crop={handleCrop}
-                            />
-                            {cropData && (
-                                <div>
-                                    <h2>Cropped Image:</h2>
-                                    <img src={cropData} alt="Cropped Preview" style={{ maxWidth: '100%' }} />
-                                </div>
-                            )} */}
                         </div>
                         :
                         <img src="myImage/avtar.png" alt="not found" className="avtar" />
@@ -61,9 +90,10 @@ const ProfilePhoto = () => {
                         <label htmlFor="img-upload" className="upload-lable">Upload Photo</label>
                         <input type="File" id="img-upload" style={{ display: "none" }} onChange={handalerImage} />
                     </div>
-                    <button className="next-btn-profile">Next</button>
+                    <button className="next-btn-profile" onClick={handelImageUpload}>Next</button>
                 </div>
             </div>
+            {/* </div> */}
         </>
     )
 }

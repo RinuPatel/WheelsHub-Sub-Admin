@@ -9,8 +9,10 @@ import FetchApi from '../constants/FetchApi';
 import { useEffect, useState } from 'react';
 function TopNavbar() {
   const [username, setUsername] = useState("")
+  const [isToken,setIsToken] = useState(false)
+
   const cookieToken = Cookies.get('jwt')
-  // console.log("token",cookieToken);
+  console.log("token",cookieToken);
   const handlerCheckUserAuth = async () => {
     try {
       if (cookieToken) {
@@ -18,8 +20,11 @@ function TopNavbar() {
           method: "GET",
 
         })
-        console.log("my res ==>", myRes.username);
-        setUsername(myRes.username)
+        console.log("my res ==>", myRes);
+        if(myRes.status === 200){
+          setIsToken(true)
+          setUsername(myRes.username)
+        }
 
       }
     } catch (error) {
@@ -50,9 +55,9 @@ function TopNavbar() {
               </div>
             </div>
           </div>
-          <div class="nav-links mx-5" >
-            { username}
-          </div>
+          {/* <div class="nav-links mx-5" >
+            {username}
+          </div> */}
         </div>
         <div class="nav" style={{ marginTop: "-2.3%" }}>
           <input type="checkbox" id="nav-check" />
@@ -78,6 +83,18 @@ function TopNavbar() {
             <Link to="/home" >Dashbord</Link>
             <Link to="/About">AboutUs</Link>
             <Link to="/ContectUs" >ContectUs</Link>
+            {username && (
+
+              <div class="dropdown">
+              <button class="dropbtn">{username}</button><img src="myImage/p2.png" alt="" style={{width:"2rem"}}/>
+              <div class="dropdown-content">
+                <a href="#">LogOut</a>
+                {/* <a href="#">Link 2</a>
+                <a href="#">Link 3</a> */}
+              </div>
+            </div>
+              )} 
+
 
           </div>
         </div>

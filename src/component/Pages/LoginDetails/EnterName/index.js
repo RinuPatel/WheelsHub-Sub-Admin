@@ -31,7 +31,7 @@ const EnterName = () => {
                 userData.append("fname", fname);
                 userData.append("lname", lname)
                 console.log("user details==>", userData);
-                const res = await fetch("http://localhost:8001/api/v1/driver-register", {
+                const res = await fetch("http://localhost:8000/api/v1/driver-register", {
                     method: 'POST',
                     body: userData
                 });

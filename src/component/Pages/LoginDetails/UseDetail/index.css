@@ -1,5 +1,5 @@
 .nav-width{
-    width: 82rem;
+    width: 100rem;
     background-color: black;
     color: aliceblue;
     font-size: 1.3rem;
@@ -10,7 +10,7 @@
     margin-top: 2rem;
     /* margin-left: 20rem; */
 }
-.container-frame h2{
+.container-frame h3{
     margin-left: 28rem;
 }
 .container-frame p{
@@ -27,28 +27,48 @@
     display: flex;
     width: 27rem;
     cursor: pointer;
+    /* background-color: aqua; */
+
 }
+.blue-line{
+    display: flex;
+}
+.succees{
+    color: green;
+}
+.article1.disabled {
+    opacity: 0.5; /* You can adjust the opacity to your preference */
+    pointer-events: none; /* Prevents mouse interaction with the element */
+  }
+  
+  /* Bootstrap's disabled class for additional styling */
+  .article1.disabled h6,
+  .article1.disabled img {
+    filter: grayscale(100%); /* Example: grayscale the text and image */
+  }
 .border-line{
     
     border-bottom: 1px solid rgb(24, 22, 22);
 }
 .arrow-sign{
-    margin-left: 20rem;
+    margin-left: 19rem;
     width: 20px;
 }
 .border-line{
     border-bottom: 1px solid grey;
 }
 .article2{
+    margin-left: 0rem;
     display: flex;
-    /* width: 30rem; */
+    width: 30rem;
     cursor: pointer;
 }
 .arrow-sign1{
-    margin-left: 16.3rem;
+    margin-left: 15rem;
     width: 20px;
 }
 .arrow-sign2{
-    margin-left: 21.3rem;
+    margin-left: 21rem;
     width: 20px;
 }
+

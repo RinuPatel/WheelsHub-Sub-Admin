@@ -2,9 +2,16 @@ import { Link } from "react-router-dom";
 import CustomInput from '../../../Element/CustomInput'
 import './index.css'
 import { useState } from "react";
+import AppConfig from "../../../../constants/AppConfig";
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
+
 
 const DrivingLicense = () => {
     const [licenceNum, setLicenceNum] = useState("")
+    const [isSuceess,setIsSuceess] = useState(false)
+    const Navigate = useNavigate();
+    const BASE_URL = AppConfig.API_BASE_URL
 
     const licenceNumber = (e) => {
         try {
@@ -12,6 +19,35 @@ const DrivingLicense = () => {
             setLicenceNum(numberVal)
         } catch (error) {
             console.log("error", error);
+        }
+    }
+
+    const handlerLicenceNumber = async ()=>{
+        try {
+            const token = Cookies.get("jwt")
+            const formData = new FormData()
+            formData.append('licenceNum', licenceNum)
+            const res = await fetch(BASE_URL+"update-user", {
+                method: 'PATCH',
+                body: formData,
+                headers: {
+                    token: token
+                }
+            })
+            const data = await res.json();
+            if(data.status ===200){
+                setIsSuceess(true)
+                localStorage.setItem("isAadharNumber",true)
+                setTimeout(() => {
+                    setIsSuceess(false)
+                    Navigate("/user-detail")
+                }, 2000);
+            }else{
+                alert("try again")
+            }
+            console.log("suceess adhar",data);
+        } catch (error) {
+            console.log(error);
         }
     }
 

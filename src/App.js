@@ -32,7 +32,7 @@ function App() {
 </div> */}
           <div>
             <Routes>
-              <Route path="/sign-up" element={<SignWith />} />
+              <Route path="/sign-up" element={<SignWith />}  />
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
