@@ -3,9 +3,11 @@ import './index.css'
 import { useState, useRef } from "react";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
+import AppConfig from "../../../../constants/AppConfig";
 
 const ProfilePhoto = (props) => {
     const Navigate = useNavigate();
+    const BASE_URL = AppConfig.API_BASE_URL
     const [image, setImage] = useState(null);
     const [cropData, setCropData] = useState(null);
     const cropperRef = useRef(null);
@@ -36,7 +38,7 @@ const ProfilePhoto = (props) => {
         try {
             const formData = new FormData()
             formData.append('image', imageFile)
-            const res = await fetch("http://localhost:8000/api/v1/update-user", {
+            const res = await fetch(BASE_URL + "update-user", {
                 method: 'PATCH',
                 body: formData,
                 headers: {
@@ -45,16 +47,17 @@ const ProfilePhoto = (props) => {
             })
             const data = await res.json();
             console.log("Api res===>", data);
+
             if (data.status === 200) {
                 // props.onProfileSuccess();
-                localStorage.setItem("isProfilePhoto",true)
+                localStorage.setItem("isProfilePhoto", true)
                 setSucess(true)
                 setTimeout(() => {
                     setSucess(false)
                     Navigate("/user-detail")
                 }, 2000);
-            }else{
-               alert("try again"); 
+            } else {
+                alert("try again");
             }
         } catch (error) {
             console.log(error);
@@ -63,16 +66,16 @@ const ProfilePhoto = (props) => {
     return (
         <>
 
-             <nav className='navber nav-width'>
+            <nav className='navber nav-width'>
                 <Link to="" className='nav-link'>CarRentZone</Link>
-            </nav> 
+            </nav>
             <div className="profile-photo">
                 {sucess && (
 
                     <div className="popup w3-animate-top">
                         <span class="popuptext" id="myPopup">Succefully upload 👍!</span>
                     </div>
-                    
+
                 )}
 
                 <Link to="/user-detail" className="upload"><img src="myImage/arrow back.svg" alt="" /></Link>

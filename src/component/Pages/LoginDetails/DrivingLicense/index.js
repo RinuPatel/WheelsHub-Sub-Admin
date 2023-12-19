@@ -5,11 +5,13 @@ import { useState } from "react";
 import AppConfig from "../../../../constants/AppConfig";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
+import SucessMsg from "../../../../SucessMsg";
 
 
 const DrivingLicense = () => {
     const [licenceNum, setLicenceNum] = useState("")
-    const [isSuceess,setIsSuceess] = useState(false)
+    const [isSuceess, setIsSuceess] = useState(false)
+    const [dob, setDob] = useState("")
     const Navigate = useNavigate();
     const BASE_URL = AppConfig.API_BASE_URL
 
@@ -22,12 +24,13 @@ const DrivingLicense = () => {
         }
     }
 
-    const handlerLicenceNumber = async ()=>{
+    const handlerLicenceNumber = async () => {
         try {
             const token = Cookies.get("jwt")
             const formData = new FormData()
-            formData.append('licenceNum', licenceNum)
-            const res = await fetch(BASE_URL+"update-user", {
+            formData.append('licenceNumber', licenceNum)
+            formData.append('dob', dob)
+            const res = await fetch(BASE_URL + "update-user", {
                 method: 'PATCH',
                 body: formData,
                 headers: {
@@ -35,17 +38,17 @@ const DrivingLicense = () => {
                 }
             })
             const data = await res.json();
-            if(data.status ===200){
+            if (data.status === 200) {
                 setIsSuceess(true)
-                localStorage.setItem("isAadharNumber",true)
+                localStorage.setItem("isLicence", true)
                 setTimeout(() => {
                     setIsSuceess(false)
                     Navigate("/user-detail")
                 }, 2000);
-            }else{
+            } else {
                 alert("try again")
             }
-            console.log("suceess adhar",data);
+            console.log("suceess adhar", data);
         } catch (error) {
             console.log(error);
         }
@@ -57,6 +60,13 @@ const DrivingLicense = () => {
                 <Link to="" className='nav-link'>CarRentZone</Link>
             </nav>
             <div className="license-frame">
+
+                {isSuceess && (
+                    // <div className="popup w3-animate-top">
+                    //     <span class="popuptext" id="myPopup">Done 👍!</span>
+                    // </div>
+                    <SucessMsg  message={"Done 👍!"}/>
+                )}
                 <Link to="/user-detail" className="upload"><img src="myImage/arrow back.svg" alt="" /></Link>
                 <h2>Enter your licence number and date of birth</h2>
                 <div className="img-icon">
@@ -73,8 +83,14 @@ const DrivingLicense = () => {
                     </CustomInput>
 
                     <label htmlFor="">Date Of Birth</label>
-                    <CustomInput type="date" className="licen-num" />
-                    <button className="btn-licence">Submit</button>
+                    <CustomInput
+                        type="date"
+                        className="licen-num"
+                        value={dob}
+                        onChange={(e) => setDob(e.target.value)}
+                    />
+
+                    <button className="btn-licence" onClick={handlerLicenceNumber}>Submit</button>
                 </div>
             </div>
         </>

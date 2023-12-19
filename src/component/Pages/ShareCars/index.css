@@ -64,11 +64,11 @@ input[type="text"],input[type="date"],input[type="number"]{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   } */
 .head{
-  margin-left: 8rem;
+  margin-left: 2rem;
   font-family: Georgia, 'Times New Roman', Times, serif;
   margin-bottom: 1rem;
-  border-bottom: 1px solid rgb(184, 177, 177);
-  width: 35%;
+  /* border-bottom: 1px solid rgb(184, 177, 177); */
+  /* width: 35%; */
 }
   .picture__img {
    width: 50rem;

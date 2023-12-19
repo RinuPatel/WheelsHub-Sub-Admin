@@ -37,7 +37,7 @@ function Navbar() {
 
                 <nav id="sidebar" className={isSidebarActive ? 'active' : ''}>
                     <div class="sidebar-header">
-                        <div>
+                        {/* <div>
                             <label className="profile-frame" htmlFor="picture__input_">
                                 <div className='picture_image'>
                                     {previewImage ? (
@@ -62,7 +62,7 @@ function Navbar() {
                                 style={{ display: "none" }}
                                 onChange={handlerProfilePicture}
                             />
-                        </div>
+                        </div> */}
 
                         <h6>User Name</h6>
 
@@ -73,7 +73,7 @@ function Navbar() {
                         <li class="active" className={isSidebarActive ? 'active' : ''}>
                             <li>
 
-                                <Link to="/home">Home</Link>
+                                <Link to="/infox">Inbox</Link>
                             </li>
                             <li>
 

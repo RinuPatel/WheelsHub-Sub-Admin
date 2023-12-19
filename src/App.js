@@ -32,25 +32,25 @@ function App() {
 </div> */}
           <div>
             <Routes>
-              <Route path="/sign-up" element={<SignWith />}  />
+              <Route path="/sign-up" element={<SignWith />} />
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/home" element={<Home />} />
               <Route path="/share-car" element={<ShareCars />} />
-              <Route path="/register-number" element={<Phone/>}/>
-              <Route path="/otp" element={<Otp/>}/>
-              <Route path="/User-name" element={<EnterName/>}/>
-              <Route path="/user-detail" element={<UserDetail/>}/>
-              <Route path='/profile-photo' element={<ProfilePhoto/>}/>
-              <Route path='/aadhar-card' element={<AadharCard/>}/>
-              <Route path="/driving-license" element={<DrivingLicense/>} />
-              <Route path="/pan-card" element={<PanCard/>} />
+              <Route path="/register-number" element={<Phone />} />
+              <Route path="/otp" element={<Otp />} />
+              <Route path="/User-name" element={<EnterName />} />
+              <Route path="/user-detail" element={<UserDetail />} />
+              <Route path='/profile-photo' element={<ProfilePhoto />} />
+              <Route path='/aadhar-card' element={<AadharCard />} />
+              <Route path="/driving-license" element={<DrivingLicense />} />
+              <Route path="/pan-card" element={<PanCard />} />
             </Routes>
           </div>
         </div>
 
-      {/* </BrowserRouter> */}
+        {/* </BrowserRouter> */}
       </Router>
     </>
   );

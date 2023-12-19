@@ -4,6 +4,7 @@ import './index.css'
 import AppConfig from "../../../../constants/AppConfig";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
+import SucessMsg from "../../../../SucessMsg";
 
 
 const AadharCard = () => {
@@ -59,9 +60,10 @@ const AadharCard = () => {
             </nav>
             <div className="aadhar-frame">
                 {isSuceess&&(
-                    <div className="popup w3-animate-top">
-                    <span class="popuptext" id="myPopup">Succefully upload 👍!</span>
-                </div>
+                //     <div className="popup w3-animate-top">
+                //     <span class="popuptext" id="myPopup">Succefully upload 👍!</span>
+                // </div>
+                <SucessMsg message={"Sucess 👍!"}/>
                 )}
                 <Link to="/user-detail" className="upload"><img src="myImage/arrow back.svg" alt="" /></Link>
 
@@ -80,6 +82,7 @@ const AadharCard = () => {
                         onChange={handleAadharChange}
                         placeholder="xxxx xxxx xxxx"
                         className="input-number"
+                        autocomplete="off"
                     />
                 </div>
                 <button className="next-btn-aadhar" onClick={handleAadharApi}>Next</button>

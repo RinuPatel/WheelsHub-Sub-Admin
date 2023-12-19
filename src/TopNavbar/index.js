@@ -42,7 +42,6 @@ function TopNavbar() {
           <div className='item-list'>
 
             <div className="nav-title title-top">
-              {/* <img src="myImage/icon-car2.jpg" alt="not found" style={{width:"70%"}}/> */}
               CarRentZone
             </div>
             <div style={{ display: "flex" }} className='contact'>
@@ -55,10 +54,9 @@ function TopNavbar() {
               </div>
             </div>
           </div>
-          {/* <div class="nav-links mx-5" >
-            {username}
-          </div> */}
+          
         </div>
+        
         <div class="nav" style={{ marginTop: "-2.3%" }}>
           <input type="checkbox" id="nav-check" />
           <div className='nav-title'>

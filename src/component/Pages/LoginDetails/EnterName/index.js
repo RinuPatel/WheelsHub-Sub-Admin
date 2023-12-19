@@ -3,7 +3,7 @@ import Customlabel from '../../../Element/Customlabel'
 import './index.css'
 import { useState } from 'react'
 import FetchApi from '../../../../constants/FetchApi'
-import SuccessPopup from '../../../SucessMsg'
+import SuccessPopup from '../../../SucessPopup'
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
 

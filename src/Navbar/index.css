@@ -85,7 +85,8 @@ a, a:hover, a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #e29292;
+    background: black;  
+    color: white;
 }
 
 #sidebar ul.components {
@@ -103,14 +104,14 @@ a, a:hover, a:focus {
     font-size: 1.1em;
     display: block;
 }
-#sidebar ul li a:hover {
+/* #sidebar ul li a:hover {
     color: white;
     background: #f33f3f;
-}
+} */
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #f33f3f;
+    /* background: #f33f3f; */
 }
 
 
