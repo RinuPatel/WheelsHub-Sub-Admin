@@ -8,6 +8,7 @@ const FetchApi =async (url,data,options={})=>{
         const headers = {
             "token": Cookies.get("jwt")?Cookies.get("jwt"):""
         }
+        // console.log("token",headers);
         if (!options.isForm) {
             headers["Content-Type"] = "application/json";
         }
@@ -21,6 +22,7 @@ const FetchApi =async (url,data,options={})=>{
         const res = await fetch(API_BASE_URL+url,fetchOptions)
         if (res.status === 200) {
             const data = await res.json();
+            // console.log("ram=>",data);
             return data
         }else{
             return res

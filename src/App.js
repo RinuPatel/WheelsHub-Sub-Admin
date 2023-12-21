@@ -19,6 +19,7 @@ import ProfilePhoto from './component/Pages/LoginDetails/ProfilePhoto';
 import AadharCard from './component/Pages/LoginDetails/AadharCard';
 import DrivingLicense from './component/Pages/LoginDetails/DrivingLicense';
 import PanCard from './component/Pages/LoginDetails/PanCard';
+import Inbox from './component/Pages/Inbox';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
               <Route path='/aadhar-card' element={<AadharCard />} />
               <Route path="/driving-license" element={<DrivingLicense />} />
               <Route path="/pan-card" element={<PanCard />} />
+              <Route path="/inbox" element={<Inbox/>}/>
             </Routes>
           </div>
         </div>

@@ -40,7 +40,7 @@ const Phone = () => {
         e.preventDefault()
         try {
             let value = e.target.value;
-            console.log(value);
+            // console.log(value);
             if (!ph) {
                 setError(true)
             } else {
@@ -67,11 +67,8 @@ const Phone = () => {
         }
 
     }
-    const Phone = {
-        phone: ph
-    }
-    console.log(Phone);
-    
+
+
     const onOTPVerify = async (e) => {
 
     //     setVerifyLoading(true);
@@ -122,12 +119,12 @@ const Phone = () => {
                 <div className='frame-content'>
                     <Link to="/sign-up"><img src="myImage/arrow back.svg" alt="" /></Link>
                     {user && (
-                        <div class="alert alert-success" role="alert">
+                        <div className="alert alert-success" role="alert">
                             Succefully Verify Number.
                         </div>
                     )}
                     {/* {user ? (
-                        <div class="alert alert-success" role="alert">
+                        <div className="alert alert-success" role="alert">
                             Succefully Verify Number.
                         </div> */}
                     {/* // ) : ( */}
@@ -166,8 +163,8 @@ const Phone = () => {
                                 <button className='next-btn' onClick={onSignup}>
                                     {loading ? (
 
-                                        <div class="spinner-border spinner-border-sm mx-2" role="status">
-                                            <span class="sr-only">Loading...</span>
+                                        <div className="spinner-border spinner-border-sm mx-2" role="status">
+                                            <span className="sr-only">Loading...</span>
                                         </div>
                                     ) : (
 
@@ -195,8 +192,8 @@ const Phone = () => {
                                     {verifyLoading ? (
                                         <>
 
-                                            <div class="spinner-border spinner-border-sm mx-2" role="status">
-                                                <span class="sr-only">Loading...</span>
+                                            <div className="spinner-border spinner-border-sm mx-2" role="status">
+                                                <span className="sr-only">Loading...</span>
                                             </div>
                                         </>
                                     ) :

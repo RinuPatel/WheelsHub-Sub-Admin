@@ -1,35 +1,39 @@
 
 import './index.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 import 'react-image-crop/dist/ReactCrop.css';
+import FetchApi from '../constants/FetchApi';
 
 function Navbar() {
     const [isSidebarActive, setIsSidebarActive] = useState(false);
     const [previewImage, setPreviewImage] = useState()
-    
     const [crop, setCrop] = useState({ unit: '%', width: 30, aspect: 1 / 1 });
+    const [isCollapsed, setCollapsed] = useState(false);
+    const [userName, setUserName] = useState("")
 
-    // const [loginPage,setLoginPage] = useState(false);
-    // const handlerLogin = () =>{
-    //     setLoginPage(true);
-    // }
+    const handleToggle = () => {
+        setCollapsed(!isCollapsed);
+    };
     const handleSidebarToggle = () => {
         setIsSidebarActive(prevState => !prevState);
     };
-
-    const handlerProfilePicture = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setPreviewImage(reader.result)
-            };
-            reader.readAsDataURL(file)
+    const handleCheckAuth = async () => {
+        try {
+            const data = await FetchApi("check-auth-phone", "", {
+                method: "GET"
+            })
+            console.log("my auth user", data);
+            if (data.status === 200) {
+                setUserName(data.username)
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
+    useEffect(() => {
+        handleCheckAuth()
+    }, [])
     return (
         <>
             <div class="wrapper">
@@ -37,34 +41,8 @@ function Navbar() {
 
                 <nav id="sidebar" className={isSidebarActive ? 'active' : ''}>
                     <div class="sidebar-header">
-                        {/* <div>
-                            <label className="profile-frame" htmlFor="picture__input_">
-                                <div className='picture_image'>
-                                    {previewImage ? (
-                                        <div>
-                                            <img src={previewImage} alt="" className="profile-frame" />
-                                        </div>
-                                    ) : 
-                                    <div>
-                                        <center style={{ marginTop: "20px" }}>
-                                            <FontAwesomeIcon icon={faCloudArrowUp} size='2x' />
-                                            <p>Profile</p>
-                                        </center>
-                                    </div>
-                                    }
 
-                                </div>
-                            </label>
-                            <input type="file"
-                                name=""
-                                id="picture__input_"
-                                accept="image/*"
-                                style={{ display: "none" }}
-                                onChange={handlerProfilePicture}
-                            />
-                        </div> */}
-
-                        <h6>User Name</h6>
+                        <h6>Hi {userName}</h6>
 
                     </div>
 
@@ -73,55 +51,34 @@ function Navbar() {
                         <li class="active" className={isSidebarActive ? 'active' : ''}>
                             <li>
 
-                                <Link to="/infox">Inbox</Link>
+                                <Link to="/dashboard"><img src="myImage/house-check.svg" alt="" className='mx-2' /> Dashboard</Link>
                             </li>
                             <li>
 
-                                <Link to="/share-car">Share Cars</Link>
+                                <Link to="/inbox"><img src="myImage/envelope.svg" alt="" className='mx-2' />Inbox</Link>
                             </li>
                             <li>
-                                <Link to="#">Contact</Link>
+
+                                <Link to="/share-car"><img src="myImage/share-fill.svg" alt="" className='mx-2' />Share Cars</Link>
                             </li>
+
                             <li>
-                                <Link to="#">Your Vahicals</Link>
+                                <Link to="#"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Your Vahicals</Link>
                             </li>
-                            <Link to="#homeSubmenu"
-                                data-toggle="collapse"
-                                aria-expanded="false"
-                                class="dropdown-toggle"
-                            >Account
-                            </Link>
-                            <ul class="collapse list-unstyled" id="homeSubmenu" >
-                                <li>
-                                    <Link to="#">Home 1</Link>
-                                </li>
-                                <li>
-                                    <Link to="#">Home 2</Link>
-                                </li>
-                                <li>
-                                    <Link to="#">Home 3</Link>
-                                </li>
-                            </ul>
+
+
+
                         </li>
                         <li>
+                            <li>
 
-                            <Link to="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
-                                class="dropdown-toggle">Pages</Link>
-                            <ul class="collapse list-unstyled" id="pageSubmenu">
-                                <li>
-                                    <Link to="#">Page 1</Link>
-                                </li>
-                                <li>
-                                    <Link to="#">Page 2</Link>
-                                </li>
-                                <li>
-                                    <Link to="#">Page 3</Link>
-                                </li>
-                            </ul>
+                            <Link to="#"><img src="myImage/person-fill.svg" alt="" className='mx-2' />Account</Link>
+                            </li>
+                                
                         </li>
                         <li>
                             {/* <button className='btn-item' onClick={handlerLogin}>Login</button> */}
-                            <Link to="/login">Login</Link>
+                            <Link to="/login"><img src="myImage/box-arrow-in-right.svg" alt="" className='mx-2' />LogOut</Link>
                         </li>
 
                     </ul>
@@ -132,7 +89,7 @@ function Navbar() {
                 {/* <!-- Page Content Holder --> */}
                 <div id="content">
 
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <nav class="navbar navbar-expand-lg  bg-light">
                         <div class="">
 
                             <button type="button"

@@ -9,8 +9,10 @@ import CustomButton from '../../Element/CustomButton';
 import FetchApi from '../../../constants/FetchApi';
 import Navbar from '../../../Navbar';
 import NavbarTopFirst from '../../../NavbarTopFirst';
-function ShareCars() {
+import AppConfig from '../../../constants/AppConfig';
 
+function ShareCars() {
+  const BASE_URL = AppConfig.API_BASE_URL
   const [imagePreviews, setImagePreviews] = useState(Array(5).fill(null));
   // const [inputValues, setInputValues] = useState(Array([5]).fill(''));
   const [carName, setCarName] = useState("Maruti")
@@ -31,7 +33,6 @@ function ShareCars() {
   const handleImageChange = (index, event) => {
     const file = event.target.files;
     const reader = new FileReader();
-    // setInputValues(event.target.files);
     const selectedImages = Array.from(event.target.files);
     var clonesImages = images.slice();
     clonesImages.push(event.target.files[0]);
@@ -83,7 +84,7 @@ function ShareCars() {
 
       if (carDetails) {
         try {
-          const response = await fetch("http://localhost:8000/api/v1/car-list", {
+          const response = await fetch(BASE_URL+"car-list", {
             method: 'POST',
             body: carDetails
           })
@@ -107,16 +108,18 @@ function ShareCars() {
   return (
     <>
       <NavbarTopFirst/>
+          
+            
       <div style={{ display: "flex",marginTop:"4rem" }}>
         <div>
-          <Navbar />
+            <Navbar />
         </div>
         <div>
-          <div className='container main-car-contact'>
+          <div className='main-car-contact'>
             <h3 className='head'>Share Your Cars With Us</h3>
-            <div className='container'>
+            <div className=''>
               <form action="">
-                <div className='container my-frame-form'>
+                <div className='my-frame-form'>
                   <div class="form-group form-field ">
                     <Customlabel>Car Name</Customlabel>
                     <Custominput
@@ -160,7 +163,7 @@ function ShareCars() {
 
                     <Customlabel>Hire</Customlabel>
                     <select name="" id=""
-                      className='input-control input'
+                      className='input-control input dropdowns'
                       style={{ paddingButton: "1rem" }}
                       value={schedule}
                       onChange={(e) => setSchedule(e.target.value)}
@@ -172,7 +175,7 @@ function ShareCars() {
                     </select>
                   </div>
 
-                  <div className='container form-field2'>
+                  <div className='form-field2'>
                     <Customlabel>FuelType</Customlabel>
                     <Custominput
                       placeholder="fuel type"
@@ -213,13 +216,13 @@ function ShareCars() {
 
                     <Customlabel>Phone Number</Customlabel>
                     <Custominput
-                      type="number"
+                      type="text"
                       placeholder="Phone Number"
                       className="input"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                     />
-
+                   
                     <Customlabel>Seats</Customlabel>
                     <select
                       name=""
@@ -237,12 +240,12 @@ function ShareCars() {
                   </div>
                 </div>
                 <h5 className='img-title'>Image Upload</h5>
-                <div className='image-upload'>
+                <div className='image-upload' >
 
-                  <div className='image-line'>
+                  <div className='image-line' >
                     {imagePreviews.map((imagePreview, index) => (
                       <div key={index}>
-                        <label className="picture" htmlFor={`picture__input_${index}`} tabIndex="0">
+                        <label className="picture" htmlFor={`picture__input_${index}`} tabIndex="0" >
                           <div className="picture__image">
                             {imagePreview ? (
                               <div>

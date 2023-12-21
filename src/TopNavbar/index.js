@@ -42,7 +42,7 @@ function TopNavbar() {
           <div className='item-list'>
 
             <div className="nav-title title-top">
-              CarRentZone
+              CarZone
             </div>
             <div style={{ display: "flex" }} className='contact'>
               <div >

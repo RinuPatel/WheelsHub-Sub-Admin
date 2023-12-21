@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import './index.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import AppConfig from "../../../../constants/AppConfig";
@@ -33,6 +33,9 @@ const UserDetail = () => {
     const [isPanClosed, setIsPanClosed] = useState(true)
     const [isPanDisabled, setIsPanDisabled] = useState(false)
 
+    useEffect(() => {
+        hanlderUserData()
+    }, [])
     const handleButtonClick = () => {
         setSliderClosed(!isSliderClosed);
     };
@@ -102,14 +105,51 @@ const UserDetail = () => {
             console.log(error);
         }
     }
+    const hanlderUserData = async () => {
+        try {
+            const res = await fetch(BASE_URL + "get-userdetail", {
+                method: "GET",
+                headers: {
+                    token: token
+                }
+            })
+            const resData = await res.json()
+            const userImage = resData.data.image;
+            const userAadhar = resData.data.aadharNumber
+            const userLicence = resData.data.licenceNumber
+            const userPan = resData.data.panNumber
+            const username = resData.data.username
+            console.log("user data get", userAadhar);
+            if (username) {
+                setUsername(username)
+            }
+            if (userImage) {
+                setButtonDisabled(true)
+            }
+            if (userAadhar) {
+                setIsAadharDisabled(true)
+            }
+            if (userLicence) {
+                setIsLicenceDisabled(true)
+            }
+            if (userPan) {
+                setIsPanDisabled(true)
+            }
+            if (userImage && userAadhar && userLicence && userPan) {
+                Navigate("/share-car")
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const handleAadharApi = async () => {
         try {
             console.log("Aadhar", aadharNumber);
-            formData.append('screenType', 2)
             const token = Cookies.get("jwt")
             const formData = new FormData()
             formData.append('aadharNumber', aadharNumber)
+            formData.append('screenType', 2)
             const res = await fetch(BASE_URL + "update-user", {
                 method: 'PATCH',
                 body: formData,
@@ -205,18 +245,18 @@ const UserDetail = () => {
     return (
         <>
             <nav className='navber nav-width'>
-                <Link to="/" className='nav-link'>CarRentZone</Link>
+                <Link to="/" className='nav-link'>CarZone</Link>
             </nav>
             <div className='container-frame'>
-                <h3>Hi Welcome </h3>
+                <h3>Hi Welcome {username}</h3>
                 <p>Here's what you need to do set up your account</p>
                 <div className='user-del'>
-
+                    {isSuccess && (
+                        <SucessMsg message={"Sucessfully! 👍😊"} />
+                    )}
                     {/* card 1 */}
                     <div>
-                        {isSuccess && (
-                            <SucessMsg message={"Sucessfully Upload"} />
-                        )}
+
                         <button
                             className={isButtonDisabled ? "disabled" : "button"}
                             onClick={handleButtonClick}
@@ -245,6 +285,9 @@ const UserDetail = () => {
                         </div>
                         {/* card 2        */}
                         <div>
+                            {/* {isSuccess && (
+                                <SucessMsg message={"Sucessfully!"} />
+                            )} */}
                             <button
                                 className={isAadharDisabled ? "disabled" : "button"}
                                 onClick={handleAadharClick}
@@ -278,9 +321,9 @@ const UserDetail = () => {
                         {/* card 3 */}
 
                         <div>
-                        {isSuccess && (
-                            <SucessMsg message={"Sucessfully!"} />
-                        )}
+                            {/* {isSuccess && (
+                                <SucessMsg message={"Sucessfully!"} />
+                            )} */}
                             <button
                                 className={isLicenceDisabled ? "disabled" : "button"}
                                 onClick={handleLicenceClick}
