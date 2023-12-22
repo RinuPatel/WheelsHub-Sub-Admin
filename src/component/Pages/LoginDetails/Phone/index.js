@@ -71,8 +71,8 @@ const Phone = () => {
 
     const onOTPVerify = async (e) => {
 
-    //     setVerifyLoading(true);
-    //     hanlderApi();
+        //     setVerifyLoading(true);
+        //     hanlderApi();
 
         // window.confirmationResult.confirm(OTP).then(async (result) => {
         //     console.log("y result ===>",result)
@@ -80,7 +80,7 @@ const Phone = () => {
 
         //     setUser(result.user);
         //     console.log("event");
-            
+
         // }).catch((error) => {
         //     console.log(error);
         //     setVerifyLoading(false)
@@ -91,22 +91,26 @@ const Phone = () => {
     const hanlderApi = async (e) => {
         try {
             const phoneNumber = ph.slice(2)
-            console.log("my phone ",phoneNumber);
-            const res = await fetch(BASE_URL + "login-user", {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({ phone: phoneNumber })
-            });
-            const data = await res.json()
-            console.log("My response",data);
-            if(data.status === 200){
-                console.log("Sucess");
-                Cookies.set("jwt", data.token, { expires: 1 })
-                Navigate("/user-detail")
-            }else{
-                Navigate("/user-name")
+            console.log("my phone ", phoneNumber);
+            if (phoneNumber) {
+
+                localStorage.setItem("phone", phoneNumber)
+                const res = await fetch(BASE_URL + "login-user", {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify({ phone: phoneNumber })
+                });
+                const data = await res.json()
+                console.log("My response", data);
+                if (data.status === 200) {
+                    console.log("Sucess");
+                    Cookies.set("jwt", data.token, { expires: 1 })
+                    Navigate("/user-detail")
+                } else {
+                    Navigate("/user-name")
+                }
             }
         } catch (error) {
             console.error("API call error:", error);

@@ -1,4 +1,36 @@
 .nav-content{
     margin-top: 4rem;
     display: flex;
+    /* background-color: #ebe9ea ;
+    width: 100%; */
+}
+body{
+
+    background-color: #ebe9ea ;
+}
+
+.ml-1{
+    margin-top: 2rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+.msg-box{
+    background-color: white;
+    padding: 0.4rem;
+    width: 50rem;
+    /* border: 1px solid rgb(218, 225, 228); */
+}
+.msg-box button{
+    margin-top: -1rem;
+    border: none;
+    background-color: white;
+    margin-left: 20rem;
+    outline: none;
+}
+.msg-box button:hover{
+    border: none;
+    outline: none;
+}
+.msg-box .msg-inner{
+    display: flex;
 }

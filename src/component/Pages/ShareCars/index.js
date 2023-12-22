@@ -1,5 +1,5 @@
 import './index.css'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
@@ -10,11 +10,13 @@ import FetchApi from '../../../constants/FetchApi';
 import Navbar from '../../../Navbar';
 import NavbarTopFirst from '../../../NavbarTopFirst';
 import AppConfig from '../../../constants/AppConfig';
+import SuccessPopup from '../../SucessPopup';
+import { useNavigate } from 'react-router-dom';
 
 function ShareCars() {
+  const Navigator = useNavigate()
   const BASE_URL = AppConfig.API_BASE_URL
   const [imagePreviews, setImagePreviews] = useState(Array(5).fill(null));
-  // const [inputValues, setInputValues] = useState(Array([5]).fill(''));
   const [carName, setCarName] = useState("Maruti")
   const [exteriorColor, setExteriorColor] = useState("Grey")
   const [interiorColor, setInteriorColor] = useState("Black")
@@ -29,6 +31,7 @@ function ShareCars() {
   const [seats, setSeats] = useState("")
   const [phone, setPhone] = useState("8569427513")
   const [images, setImages] = useState([])
+  const [isSuceess,setIsSuceess] = useState(false)
 
   const handleImageChange = (index, event) => {
     const file = event.target.files;
@@ -38,9 +41,6 @@ function ShareCars() {
     clonesImages.push(event.target.files[0]);
     console.log("My clonesImages ==>", clonesImages)
     setImages(clonesImages);
-
-
-
     if (file) {
       reader.onloadend = () => {
         const newPreviews = [...imagePreviews];
@@ -54,16 +54,31 @@ function ShareCars() {
       console.log("file name", file.name);
       // newInputValues[index] = file.name;
     }
-
-
   };
-
-  const handlerFromSubmit = async (e, index) => {
+  const handleUserName = async() =>{
+    try {
+        const data  = await FetchApi("check-auth-phone","",{
+          method:"GET"
+        })
+        console.log("use res",data)
+        if(data.status===200){
+          setAdmidName(data.username)
+          setPhone(data.userData)
+        }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+useEffect(()=>{
+  handleUserName()
+},[])
+  const handlerFromSubmit = async (e) => {
 
     try {
       e.preventDefault()
       console.log("my form");
-
+      const user = localStorage.getItem("userName");
+      // setAdmidName(user)
       const carDetails = new FormData();
       carDetails.append("carName", carName);
       carDetails.append("exteriorColor", exteriorColor);
@@ -77,6 +92,7 @@ function ShareCars() {
       carDetails.append("phone", phone);
       carDetails.append("schedule", schedule);
       carDetails.append("seats", seats);
+      carDetails.append("admidName",user)
       images.forEach((image, index) => {
         carDetails.append(`image`, image);
       });
@@ -84,14 +100,19 @@ function ShareCars() {
 
       if (carDetails) {
         try {
-          const response = await fetch(BASE_URL+"car-list", {
+          const response = await fetch(BASE_URL + "car-list", {
             method: 'POST',
             body: carDetails
           })
           const data = await response.json();
-          // const data = await FetchApi("car-list",carDetails,{
-          //   method:"POST"
-          // })
+          
+          if(data.status===200){
+            setIsSuceess(true)
+            setTimeout(() => {
+              setIsSuceess(false)
+              Navigator("/your-cars")
+            }, 15000);
+          }
           console.log("API Response", data);
         }
         catch (error) {
@@ -107,17 +128,20 @@ function ShareCars() {
 
   return (
     <>
-      <NavbarTopFirst/>
-          
-            
-      <div style={{ display: "flex",marginTop:"4rem" }}>
+      <NavbarTopFirst />
+
+
+      <div style={{ display: "flex", marginTop: "4rem" }}>
         <div>
-            <Navbar />
+          <Navbar />
         </div>
         <div>
           <div className='main-car-contact'>
             <h3 className='head'>Share Your Cars With Us</h3>
             <div className=''>
+              {isSuceess &&( 
+                 <SuccessPopup message={"Sucessfully Upload!👍😊"}/>
+              )}
               <form action="">
                 <div className='my-frame-form'>
                   <div class="form-group form-field ">
@@ -214,15 +238,15 @@ function ShareCars() {
                       onChange={(e) => setVehicalNo(e.target.value)}
                     />
 
-                    <Customlabel>Phone Number</Customlabel>
+                    {/* <Customlabel>Phone Number</Customlabel>
                     <Custominput
                       type="text"
                       placeholder="Phone Number"
                       className="input"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                    />
-                   
+                    /> */}
+
                     <Customlabel>Seats</Customlabel>
                     <select
                       name=""

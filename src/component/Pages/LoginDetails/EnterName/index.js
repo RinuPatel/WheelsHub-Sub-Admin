@@ -31,24 +31,27 @@ const EnterName = () => {
                 userData.append("fname", fname);
                 userData.append("lname", lname)
                 console.log("user details==>", userData);
-                const res = await fetch("http://localhost:8000/api/v1/driver-register", {
-                    method: 'POST',
-                    body: userData
-                });
-                const data = await res.json();
-                console.log("data user ===>", data);
+                if (userData) {
 
-                if (data.status === 200) {
+                    const res = await fetch("http://localhost:8000/api/v1/driver-register", {
+                        method: 'POST',
+                        body: userData
+                    });
+                    const data = await res.json();
+                    console.log("data user ===>", data);
 
-                    Cookies.set('jwt', data.token, { expires: 1 })
-                    setSucess(true)
-                    setTimeout(() => {
-                        setSucess(false)
-                        navigate('/user-detail');
-                    }, 2000);
+                    if (data.status === 200) {
+
+                        Cookies.set('jwt', data.token, { expires: 1 })
+                        setSucess(true)
+                        setTimeout(() => {
+                            setSucess(false)
+                            navigate('/user-detail');
+                        }, 2000);
+                    }
+                }else{
+                    alert("something  wrong")
                 }
-                localStorage.setItem("phone", "");
-                localStorage.setItem("username",fname)
             }
             setLname("")
             setFname("")

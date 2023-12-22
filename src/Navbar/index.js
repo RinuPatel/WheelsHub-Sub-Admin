@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import 'react-image-crop/dist/ReactCrop.css';
 import FetchApi from '../constants/FetchApi';
 
-function Navbar() {
+function Navbar(props) {
     const [isSidebarActive, setIsSidebarActive] = useState(false);
     const [previewImage, setPreviewImage] = useState()
     const [crop, setCrop] = useState({ unit: '%', width: 30, aspect: 1 / 1 });
@@ -26,6 +26,8 @@ function Navbar() {
             console.log("my auth user", data);
             if (data.status === 200) {
                 setUserName(data.username)
+                // props.value = userName
+                localStorage.setItem("userName",data.username)
             }
         } catch (error) {
             console.log(error);
@@ -63,9 +65,11 @@ function Navbar() {
                             </li>
 
                             <li>
-                                <Link to="#"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Your Vahicals</Link>
+                                <Link to="/your-cars"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Your Vahicals</Link>
                             </li>
-
+                            <li>
+                                <Link to="/your-cars"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Buy Old Car</Link>
+                            </li>
 
 
                         </li>

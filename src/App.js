@@ -20,6 +20,8 @@ import AadharCard from './component/Pages/LoginDetails/AadharCard';
 import DrivingLicense from './component/Pages/LoginDetails/DrivingLicense';
 import PanCard from './component/Pages/LoginDetails/PanCard';
 import Inbox from './component/Pages/Inbox';
+import YourCars from './component/Pages/YourCars';
+import Dashboard from './component/Pages/Dashboard';
 
 function App() {
   return (
@@ -35,7 +37,6 @@ function App() {
             <Routes>
               <Route path="/sign-up" element={<SignWith />} />
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/home" element={<Home />} />
               <Route path="/share-car" element={<ShareCars />} />
@@ -48,6 +49,8 @@ function App() {
               <Route path="/driving-license" element={<DrivingLicense />} />
               <Route path="/pan-card" element={<PanCard />} />
               <Route path="/inbox" element={<Inbox/>}/>
+              <Route path="/your-cars" element={<YourCars/>} />
+              <Route path="dashboard" element={<Dashboard/>}/>
             </Routes>
           </div>
         </div>
