@@ -111,7 +111,7 @@ useEffect(()=>{
             setTimeout(() => {
               setIsSuceess(false)
               Navigator("/your-cars")
-            }, 15000);
+            }, 1500);
           }
           console.log("API Response", data);
         }
@@ -256,9 +256,9 @@ useEffect(()=>{
                       onChange={(e) => setSeats(e.target.value)}
                     >
                       <option value="">Select Seats</option>
-                      <option value="5 Seats">5 Seats</option>
-                      <option value="6 Seats">6 Seats</option>
-                      <option value="7 Seats">7 Seats</option>
+                      <option value="5 Seats">5</option>
+                      <option value="6 Seats">6</option>
+                      <option value="7 Seats">7</option>
                     </select>
 
                   </div>

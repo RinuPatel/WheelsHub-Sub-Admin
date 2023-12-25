@@ -16,7 +16,7 @@ const EnterName = () => {
     const [sucess, setSucess] = useState(false)
 
     const phoneNumber = localStorage.getItem("phone");
-    const phone = phoneNumber.slice(2)
+     
     //   console.log("phone ==>",phone);
 
     const handelerFormSubmit = async (e) => {
@@ -27,7 +27,7 @@ const EnterName = () => {
             } else {
 
                 const userData = new FormData();
-                userData.append("phone", phone);
+                userData.append("phone", phoneNumber);
                 userData.append("fname", fname);
                 userData.append("lname", lname)
                 console.log("user details==>", userData);
