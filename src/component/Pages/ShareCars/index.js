@@ -128,14 +128,14 @@ useEffect(()=>{
 
   return (
     <>
-      <NavbarTopFirst />
+      {/* <NavbarTopFirst /> */}
 
 
-      <div style={{ display: "flex", marginTop: "4rem" }}>
-        <div>
+      <div className='contect-body' style={{display:"flex"}}>
+        <div className="nav-content">
           <Navbar />
         </div>
-        <div>
+        <div className="">
           <div className='main-car-contact'>
             <h3 className='head'>Share Your Cars With Us</h3>
             <div className=''>

@@ -9,7 +9,7 @@ const NavbarTopFirst = () => {
                     <div className='item-list'>
 
                         <div className="nav-title title-top">
-                            <Link to="/"> CarZone</Link>
+                            {/* <Link to="/"> CarZone</Link> */}
                         </div>
                         <div style={{ display: "flex" }} className='contact'>
                             <div className="icon-phone mx-3">

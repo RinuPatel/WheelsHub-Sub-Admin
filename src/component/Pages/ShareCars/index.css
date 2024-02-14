@@ -1,11 +1,13 @@
 .main-car-contact {
-  margin-top: 5rem;
+  margin-top: 8rem;
   border:1px solid rgb(238, 233, 233);
   width:50rem;
   background: #fdfdfd;
-  margin-left: 4rem;
+  margin-left: -50rem;
 }
-
+.nav-content{
+  display: flex;
+}
 .form-field {
   display: grid;
   width: 22rem;

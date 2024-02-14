@@ -205,7 +205,16 @@ a.article, a.article:hover {
     opacity: 1;
     margin: 5px auto;
 }
-
+.booking-count{
+    background-color: red;
+   color: #fff;
+  font-size: 10px;
+  font-family: Arial, san-serif;
+  font-weight: bold;
+  padding: 0.3rem;
+  border-radius: 1rem;
+    
+}
 
 /* ---------------------------------------------------
     MEDIAQUERIES

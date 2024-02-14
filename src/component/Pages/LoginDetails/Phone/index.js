@@ -106,7 +106,7 @@ const Phone = () => {
                 console.log("My response", data);
                 if (data.status === 200) {
                     console.log("Sucess");
-                    Cookies.set("jwt", data.token, { expires: 1 })
+                    Cookies.set("jwt", data.token, { expires: 7 })
                     Navigate("/user-detail")
                 } else {
                     Navigate("/user-name")

@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import 'react-image-crop/dist/ReactCrop.css';
 import FetchApi from '../constants/FetchApi';
 
-function Navbar(props) {
+function Navbar({ statusCount }) {
+    console.log("status ==>", statusCount);
     const [isSidebarActive, setIsSidebarActive] = useState(false);
-    const [previewImage, setPreviewImage] = useState()
-    const [crop, setCrop] = useState({ unit: '%', width: 30, aspect: 1 / 1 });
+    // const [previewImage, setPreviewImage] = useState()
+    // const [crop, setCrop] = useState({ unit: '%', width: 30, aspect: 1 / 1 });
     const [isCollapsed, setCollapsed] = useState(false);
     const [userName, setUserName] = useState("")
 
@@ -27,7 +28,7 @@ function Navbar(props) {
             if (data.status === 200) {
                 setUserName(data.username)
                 // props.value = userName
-                localStorage.setItem("userName",data.username)
+                localStorage.setItem("userName", data.username)
             }
         } catch (error) {
             console.log(error);
@@ -57,7 +58,7 @@ function Navbar(props) {
                             </li>
                             <li>
 
-                                <Link to="/inbox"><img src="myImage/envelope.svg" alt="" className='mx-2' />Inbox</Link>
+                                <Link to="/inbox"><img src="myImage/envelope.svg" alt="" className='mx-2' />Inbox {statusCount && (<span className='booking-count'> {statusCount}</span>)}</Link>
                             </li>
                             <li>
 
@@ -76,9 +77,9 @@ function Navbar(props) {
                         <li>
                             <li>
 
-                            <Link to="#"><img src="myImage/person-fill.svg" alt="" className='mx-2' />Account</Link>
+                                <Link to="#"><img src="myImage/person-fill.svg" alt="" className='mx-2' />Account</Link>
                             </li>
-                                
+
                         </li>
                         <li>
                             {/* <button className='btn-item' onClick={handlerLogin}>Login</button> */}
@@ -93,7 +94,7 @@ function Navbar(props) {
                 {/* <!-- Page Content Holder --> */}
                 <div id="content">
 
-                    <nav class="navbar navbar-expand-lg  bg-light">
+                    <nav class="navbar navbar-expand-lg  bg-light container-fluid" >
                         <div class="">
 
                             <button type="button"
@@ -110,6 +111,21 @@ function Navbar(props) {
 
 
 
+                        </div>
+                        <div>
+                        <div style={{ display: "flex" }} className='contact'>
+                            
+                            <div className="icon-phone mx-3">
+                                {/* <img src="myImage/call-logo.png" alt="" className="img-phone" /> */}
+                                <span class="material-symbols-outlined">
+                                    call
+                                </span>
+                            </div>
+                            <div className='mx-2'>
+                                <h6>contact-us</h6>
+                                0261-251 425 854
+                            </div>
+                        </div>
                         </div>
                     </nav>
 

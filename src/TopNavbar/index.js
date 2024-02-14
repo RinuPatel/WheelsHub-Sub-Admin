@@ -7,7 +7,10 @@ import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import FetchApi from '../constants/FetchApi';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 function TopNavbar() {
+  const Navigate = useNavigate()
   const [username, setUsername] = useState("")
   const [isToken,setIsToken] = useState(false)
 
@@ -31,7 +34,24 @@ function TopNavbar() {
       console.log(error);
     }
   }
-
+  const handlerLogout = async ()=>{
+    try {
+      if(cookieToken){
+        const myRes = await FetchApi("logout-driver","",{
+          method:"GET"
+        })
+        console.log(myRes);
+       if( myRes.status === 200){
+        setIsToken(false)
+        Cookies.remove("jwt")
+        Navigate("/home")
+       }
+        
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
     handlerCheckUserAuth()
   })
@@ -43,6 +63,7 @@ function TopNavbar() {
 
             <div className="nav-title title-top">
               CarZone
+              {/* <img src="/myImage/car-icon2.png" alt="" style={{width:"150px"}} /> */}
             </div>
             <div style={{ display: "flex" }} className='contact'>
               <div >
@@ -86,9 +107,8 @@ function TopNavbar() {
               <div class="dropdown">
               <button class="dropbtn">{username}</button><img src="myImage/p2.png" alt="" style={{width:"2rem"}}/>
               <div class="dropdown-content">
-                <a href="#">LogOut</a>
-                {/* <a href="#">Link 2</a>
-                <a href="#">Link 3</a> */}
+                <Link href="#" onClick={handlerLogout}>LogOut</Link>
+              
               </div>
             </div>
               )} 
