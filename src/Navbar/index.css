@@ -5,7 +5,7 @@
 
 
 body {
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
     background: #fafafa;
 }
 
@@ -24,14 +24,26 @@ a, a:hover, a:focus {
 }
 
 .navbar {
-    padding: 15px 10px;
+    /* margin-top: 3rem; */
+    padding: 0px 15px;
     background: #fff;
     border: none;
     border-radius: 0;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    /* justify-content: space-between; */
+    
 }
+.nav-size{
+    width: 70rem;
 
+}
+.nav-active{
+    width: 90rem;
+}
+.contact{
+    margin-left: 8rem;
+}
 .navbar-btn {
     box-shadow: none;
     outline: none !important;
@@ -62,6 +74,7 @@ a, a:hover, a:focus {
 ----------------------------------------------------- */
 
 .wrapper {
+    margin-top: 0rem;
     display: flex;
     width: 100%;
     align-items: stretch;
@@ -167,7 +180,7 @@ a.article, a.article:hover {
 ----------------------------------------------------- */
 #content {
     width: 100%;
-    padding: 20px;
+    /* padding: 20px; */
     min-height: 100vh;
     transition: all 0.3s;
 }
@@ -208,18 +221,30 @@ a.article, a.article:hover {
 .booking-count{
     background-color: red;
    color: #fff;
-  font-size: 10px;
-  font-family: Arial, san-serif;
+  font-size: 12px;
+  margin-left: -0.3rem;
+  font-family: 'Times New Roman', Times, serif;
   font-weight: bold;
-  padding: 0.3rem;
-  border-radius: 1rem;
+  position: absolute;
+  margin-top: -0.6rem;
+  padding: 0rem 0.4rem;
+  border-radius: 6rem;
     
 }
 
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
+
+
 @media (max-width: 768px) {
+    #content {
+        margin-top: 0rem;
+        width: 100%;
+        
+        min-height: 100vh;
+        transition: all 0.3s;
+      }
     #sidebar {
         margin-left: -250px;
         transform: rotateY(90deg);
@@ -247,8 +272,14 @@ a.article, a.article:hover {
     #sidebarCollapse.active span:last-of-type {
         transform: rotate(-45deg) translate(1px, -1px);
     }
-
+    .wrapper {
+        margin-top: -2.7rem;
+      }
 }
+
+
+
+
 /* profile */
 .profile-frame{
     background-color: rgb(252, 241, 241);
@@ -257,3 +288,4 @@ a.article, a.article:hover {
     height: 90px;
     border-radius: 45px;
 }
+

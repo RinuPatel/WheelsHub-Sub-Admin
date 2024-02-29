@@ -1,12 +1,4 @@
-* {
-    box-sizing: border-box;
-  }
-  
-  body {
-    margin: 0px;
-    font-family: 'segoe ui';
-  }
-  
+
   .nav {
     height: 50px;
     width: 100%;
@@ -169,6 +161,6 @@
     display: block;
   }
   
-  /* .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-  } */
+ 
+
+  

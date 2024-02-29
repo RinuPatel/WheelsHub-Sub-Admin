@@ -4,12 +4,12 @@ import './index.css'
 const NavbarTopFirst = () => {
     return (
         <>
-            <nav fixed="top" className='navbar-fixed-top'>
-                <div class="navbar  navbar-expand-lg navbar-light bg-light" fixed="top">
+            <nav fixed="top" className='navbar-fixed-top' id="navber">
+                <div class="navbar  navbar-expand-lg navbar-light bg-light" fixed="top" id="top_nav">
                     <div className='item-list'>
 
                         <div className="nav-title title-top">
-                            {/* <Link to="/"> CarZone</Link> */}
+                            <Link to="/"> WheelsHub</Link>
                         </div>
                         <div style={{ display: "flex" }} className='contact'>
                             <div className="icon-phone mx-3">

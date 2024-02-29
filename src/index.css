@@ -5,10 +5,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */
 /* .react-tel-input .from-control{
   @apply | w-full py-6 | text-base;
 } */

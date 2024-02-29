@@ -245,7 +245,7 @@ const UserDetail = () => {
     return (
         <>
             <nav className='navber nav-width'>
-                <Link to="/" className='nav-link'>CarZone</Link>
+                <Link to="/" className='nav-link'>WheelsHub</Link>
             </nav>
             <div className='container-frame'>
                 <h3>Hi Welcome {username}</h3>

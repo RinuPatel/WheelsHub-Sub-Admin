@@ -28,7 +28,7 @@ const Phone = () => {
         window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
             'size': 'invisible',
             'callback': (response) => {
-                // onSignup()
+                onSignup()
             },
             'expired-callback': () => {
                 // Response expired. Ask user to solve reCAPTCHA again.
@@ -46,20 +46,20 @@ const Phone = () => {
             } else {
                 setError(false)
                 setLoading(true)
-                hanlderApi();
-                // onCaptchverify()
-                // const appVerifier = window.recaptchaVerifier
-                // const formatph = '+' + ph
-                // signInWithPhoneNumber(auth, formatph, appVerifier)
-                //     .then((confirmationResult) => {
-
-                //         window.confirmationResult = confirmationResult;
-                //         setShowOTP(true)
-                //         toast.success('OTP sended success')
-                //     }).catch((error) => {
-                //         console.log(error);
-                //         setLoading(false)
-                //     });
+                onCaptchverify()
+                const appVerifier = window.recaptchaVerifier
+                const formatph = '+' + ph
+                signInWithPhoneNumber(auth, formatph, appVerifier)
+                .then((confirmationResult) => {
+                    
+                    window.confirmationResult = confirmationResult;
+                    setShowOTP(true)
+                    toast.success('OTP sended success')
+                }).catch((error) => {
+                    console.log(error);
+                    setLoading(false)
+                });
+                
 
             }
         } catch (error) {
@@ -71,20 +71,20 @@ const Phone = () => {
 
     const onOTPVerify = async (e) => {
 
-        //     setVerifyLoading(true);
-        //     hanlderApi();
+        setVerifyLoading(true);
+        hanlderApi();
 
-        // window.confirmationResult.confirm(OTP).then(async (result) => {
-        //     console.log("y result ===>",result)
-        //     const user = result.user;
+        window.confirmationResult.confirm(OTP).then(async (result) => {
+            console.log("y result ===>", result)
+            const user = result.user;
 
-        //     setUser(result.user);
-        //     console.log("event");
+            setUser(result.user);
+            console.log("event");
 
-        // }).catch((error) => {
-        //     console.log(error);
-        //     setVerifyLoading(false)
-        // });
+        }).catch((error) => {
+            console.log(error);
+            setVerifyLoading(false)
+        });
 
 
     }
@@ -107,7 +107,10 @@ const Phone = () => {
                 if (data.status === 200) {
                     console.log("Sucess");
                     Cookies.set("jwt", data.token, { expires: 7 })
-                    Navigate("/user-detail")
+                    setTimeout(() => {
+                        
+                        Navigate("/user-detail")
+                    }, 3000);
                 } else {
                     Navigate("/user-name")
                 }
@@ -119,7 +122,7 @@ const Phone = () => {
     // hanlderApi()
     return (
         <>
-            <div className="frame-number">
+            <div className="frame-number" id='frame-main'>
                 <div className='frame-content'>
                     <Link to="/sign-up"><img src="myImage/arrow back.svg" alt="" /></Link>
                     {user && (
@@ -127,90 +130,93 @@ const Phone = () => {
                             Succefully Verify Number.
                         </div>
                     )}
-                    {/* {user ? (
+                    {user ? (
                         <div className="alert alert-success" role="alert">
                             Succefully Verify Number.
-                        </div> */}
-                    {/* // ) : ( */}
-                    <div>
-                        {!showOTP ?
-                            <div>
-                                <h3>Enter your phone number</h3>
-                                <p className='subtitle'>This number will be used to contact you and
-                                    comminucate all ride related details.</p>
-                                <div style={{ display: "flex" }} className='fleg-dial'>
+                        </div>
+                    ) : (
+                        <div>
+                            {!showOTP ?
+                                <div>
+                                    <h3>Enter your phone number</h3>
+                                    <p className='subtitle'>This number will be used to contact you and
+                                        comminucate all ride related details.</p>
+                                    <div style={{ display: "flex" }} className='fleg-dial'>
 
 
-                                    <Toaster toastOptions={{ duration: 4000 }} />
-                                    <div id="recaptcha-container"></div>
-                                </div>
+                                        <Toaster toastOptions={{ duration: 4000 }} />
+                                        <div id="recaptcha-container"></div>
+                                    </div>
 
 
-                                <PhoneInput
-                                    country={"in"}
-                                    value={ph}
-                                    onChange={setPh}
-                                    inputStyle={{
-                                        width: '500px',
-                                        height: '40px',
-                                        fontSize: '14px',
+                                    <PhoneInput
+                                        country={"in"}
+                                        value={ph}
+                                        onChange={setPh}
+                                        inputStyle={{
+                                            width: '500px',
+                                            height: '40px',
+                                            fontSize: '14px',
 
-                                    }}
-                                    className="btn-phone-input"
-                                ></PhoneInput>
-                                <span style={{ height: "4px" }}>
+                                        }}
+                                        className="btn-phone-input"
+                                    ></PhoneInput>
+                                    <span style={{ height: "4px" }}>
 
-                                    {error && (
-                                        <label className='error'>Enter phone number</label>
-                                    )}
-                                </span>
-                                <button className='next-btn' onClick={onSignup}>
-                                    {loading ? (
-
-                                        <div className="spinner-border spinner-border-sm mx-2" role="status">
-                                            <span className="sr-only">Loading...</span>
-                                        </div>
-                                    ) : (
-
-                                        <span className='mx-2'>Send OTP</span>
-                                    )}
-                                </button>
-
-                            </div> :
-                            <div className='otp-input'>
-                                <label htmlFor="" className='text-style'>
-                                    Enter your OTP
-                                </label>
-                                <OTPInput value={OTP}
-                                    onChange={setOTP}
-                                    autoFocus OTPLength={6}
-                                    otpType="number"
-                                    disabled={false} />
-
-
-                                <button
-                                    className='btn-verify'
-                                    onClick={onOTPVerify}
-
-                                >
-                                    {verifyLoading ? (
-                                        <>
+                                        {error && (
+                                            <label className='error'>Enter phone number</label>
+                                        )}
+                                    </span>
+                                    <button className='next-btn' 
+                                    // onClick={onSignup}
+                                    onClick={hanlderApi}
+                                    >
+                                        {loading ? (
 
                                             <div className="spinner-border spinner-border-sm mx-2" role="status">
                                                 <span className="sr-only">Loading...</span>
                                             </div>
-                                        </>
-                                    ) :
+                                        ) : (
 
-                                        <span>Verify OTP</span>
-                                    }
-                                </button>
-                            </div>
-                        }
+                                            <span className='mx-2'>Send OTP</span>
+                                        )}
+                                    </button>
+
+                                </div> :
+                                <div className='otp-input'>
+                                    <label htmlFor="" className='text-style'>
+                                        Enter your OTP
+                                    </label>
+                                    <OTPInput value={OTP}
+                                        onChange={setOTP}
+                                        autoFocus OTPLength={6}
+                                        otpType="number"
+                                        disabled={false} />
 
 
-                    </div>
-                    {/* )} */}
+                                    <button
+                                        className='btn-verify'
+                                        onClick={onOTPVerify}
+
+                                    >
+                                        {verifyLoading ? (
+                                            <>
+
+                                                <div className="spinner-border spinner-border-sm mx-2" role="status">
+                                                    <span className="sr-only">Loading...</span>
+                                                </div>
+                                            </>
+                                        ) :
+
+                                            <span>Verify OTP</span>
+                                        }
+                                    </button>
+                                </div>
+                            }
+
+
+                        </div>
+                    )}
 
 
 

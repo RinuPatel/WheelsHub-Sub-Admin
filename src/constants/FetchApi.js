@@ -8,7 +8,7 @@ const FetchApi =async (url,data,options={})=>{
         const headers = {
             "token": Cookies.get("jwt")?Cookies.get("jwt"):""
         }
-        // console.log("token",headers);
+        console.log("token",headers);
         if (!options.isForm) {
             headers["Content-Type"] = "application/json";
         }

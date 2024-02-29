@@ -12,10 +12,10 @@ import { useNavigate } from 'react-router-dom';
 function TopNavbar() {
   const Navigate = useNavigate()
   const [username, setUsername] = useState("")
-  const [isToken,setIsToken] = useState(false)
+  const [isToken, setIsToken] = useState(false)
 
   const cookieToken = Cookies.get('jwt')
-  console.log("token",cookieToken);
+  console.log("token", cookieToken);
   const handlerCheckUserAuth = async () => {
     try {
       if (cookieToken) {
@@ -24,7 +24,7 @@ function TopNavbar() {
 
         })
         console.log("my res ==>", myRes);
-        if(myRes.status === 200){
+        if (myRes.status === 200) {
           setIsToken(true)
           setUsername(myRes.username)
         }
@@ -34,19 +34,19 @@ function TopNavbar() {
       console.log(error);
     }
   }
-  const handlerLogout = async ()=>{
+  const handlerLogout = async () => {
     try {
-      if(cookieToken){
-        const myRes = await FetchApi("logout-driver","",{
-          method:"GET"
+      if (cookieToken) {
+        const myRes = await FetchApi("logout-driver", "", {
+          method: "GET"
         })
         console.log(myRes);
-       if( myRes.status === 200){
-        setIsToken(false)
-        Cookies.remove("jwt")
-        Navigate("/home")
-       }
-        
+        if (myRes.status === 200) {
+          setIsToken(false)
+          Cookies.remove("jwt")
+          Navigate("/home")
+        }
+
       }
     } catch (error) {
       console.log(error);
@@ -58,12 +58,11 @@ function TopNavbar() {
   return (
     <>
       <nav fixed="top" className='navbar-fixed-top'>
-        <div class="navbar  navbar-expand-lg navbar-light bg-light" fixed="top">
+        {/* <div class="navbar  navbar-expand-lg navbar-light bg-light" fixed="top">
           <div className='item-list'>
 
             <div className="nav-title title-top">
-              CarZone
-              {/* <img src="/myImage/car-icon2.png" alt="" style={{width:"150px"}} /> */}
+              WheelsHub
             </div>
             <div style={{ display: "flex" }} className='contact'>
               <div >
@@ -76,12 +75,11 @@ function TopNavbar() {
             </div>
           </div>
           
-        </div>
+        </div> */}
         
-        <div class="nav" style={{ marginTop: "-2.3%" }}>
+        <div class="nav" style={{ marginTop: "0%" }}>
           <input type="checkbox" id="nav-check" />
           <div className='nav-title'>
-            <h3 className='title'> Drive</h3>
           </div>
 
           <div class="nav-btn">
@@ -95,9 +93,6 @@ function TopNavbar() {
           <div class="nav-links" style={{ display: "flex", fontFamily: "Times New Roman" }}>
             <ul>
 
-              {/* <i class="bi bi-search"></i>
-              <input type="text" name="" id="" placeholder='Search'/>
-              */}
             </ul>
             <Link to="/home" >Dashbord</Link>
             <Link to="/About">AboutUs</Link>
@@ -117,6 +112,26 @@ function TopNavbar() {
           </div>
         </div>
       </nav>
+
+      {/* <nav class="navbar">
+        <div class="navbar-container container">
+          <input type="checkbox" name="" id="" />
+          <div class="hamburger-lines">
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
+          </div>
+          <ul class="menu-items">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Category</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Testimonial</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+          <h1 class="logo">Navbar</h1>
+        </div>
+      </nav> */}
     </>
   );
 }

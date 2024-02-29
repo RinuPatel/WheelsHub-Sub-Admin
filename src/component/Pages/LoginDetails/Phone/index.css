@@ -1,11 +1,11 @@
 .frame-number {
     background-color: #f5f1f1;
-    /* border: 2px solid black; */
-    margin-left: 17rem;
     width: 45rem;
     height: 100vh;
 }
-
+#frame-main{
+    margin-left: 22rem;
+}
 .frame-content img,
 h3 {
     margin: 1rem;
@@ -75,3 +75,10 @@ margin-left: 1.3rem;
     margin-left: 1.5rem;
     color: red;
 }
+@media (max-width: 766px) {
+
+    #frame-main{
+        margin-left: 2rem;
+    }
+}
+

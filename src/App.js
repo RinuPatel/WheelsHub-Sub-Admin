@@ -22,13 +22,15 @@ import PanCard from './component/Pages/LoginDetails/PanCard';
 import Inbox from './component/Pages/Inbox';
 import YourCars from './component/Pages/YourCars';
 import Dashboard from './component/Pages/Dashboard';
+// import SideNavber from './Modules/SideNavMenu';
+// import Navbar from './Navbar';
 
 function App() {
   return (
     <>
       {/* <BrowserRouter> */}
       <Router>
-        <div style={{ display: "flex" }}>
+        {/* <div style={{ display: "flex" }}> */}
           {/* <div>
 
 <Navbar />
@@ -50,10 +52,12 @@ function App() {
               <Route path="/pan-card" element={<PanCard />} />
               <Route path="/inbox" element={<Inbox/>}/>
               <Route path="/your-cars" element={<YourCars/>} />
-              <Route path="dashboard" element={<Dashboard/>}/>
+              <Route path="/dashboard" element={<Dashboard/>}/>
+              {/* <Route path="/side-nav" element={<SideNavber/>}/> */}
+              
             </Routes>
           </div>
-        </div>
+        {/* </div> */}
 
         {/* </BrowserRouter> */}
       </Router>
