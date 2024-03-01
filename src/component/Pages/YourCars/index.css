@@ -16,6 +16,9 @@
     background-color: rgb(245, 244, 244);
     box-shadow: 0 10px 15px 0 rgb(186, 183, 183);
 }
+.sidebar-header h6{
+    font-size: 15px;
+}
 .main_content p{
     margin-top: 1rem;
     font-size: 1.5rem;

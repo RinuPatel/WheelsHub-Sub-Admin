@@ -40,7 +40,7 @@ export default function TopBener() {
                         <div className='main-button'>
                             {isToken ?
                                 <button className='get-start-btn'>
-                                    <Link to="/user-detail">Get Started</Link>
+                                    <Link to="/dashboard">Get Started</Link>
                                 </button>
                                 :
                                 <button className='get-start-btn'>

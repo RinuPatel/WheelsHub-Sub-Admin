@@ -178,6 +178,7 @@ function ShareCars() {
       <div class="wrapper">
         <nav id="sidebar" className={isSidebarActive ? 'active' : ''}>
           <div class="sidebar-header">
+          <Link to="/" className="driverTitle"><h2>EasyDrive</h2></Link>
             <h6>Hi {userName}</h6>
           </div>
 
@@ -201,7 +202,7 @@ function ShareCars() {
               <Link to="/your-cars"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Your Vahicals</Link>
             </li>
             <li>
-              <Link to="/your-cars"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Buy Old Car</Link>
+              <Link to="/"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />income</Link>
             </li>
             <li>
 

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import FetchApi from "../../../constants/FetchApi";
-import "./index.module.css"
+import "./index.css"
 
 const Dashboard = () => {
     const location = useState()
@@ -10,6 +10,7 @@ const Dashboard = () => {
     const [isCollapsed, setCollapsed] = useState(false);
     const [userName, setUserName] = useState("")
     const [peddingCount, setPeddingCount] = useState()
+    const [online, setOnline] = useState(true)
 
     const handleToggle = () => {
         setCollapsed(!isCollapsed);
@@ -41,6 +42,16 @@ const Dashboard = () => {
             console.log(error);
         }
     }
+
+    const driverOnlineAndOfflineHander = () => {
+        try {
+            setOnline(prevStatus => !prevStatus)
+        } catch (error) {
+
+        }
+    }
+
+
     useEffect(() => {
         handleCheckAuth()
     }, [])
@@ -50,6 +61,7 @@ const Dashboard = () => {
             <div class="wrapper">
                 <nav id="sidebar" className={isSidebarActive ? 'active' : ''}>
                     <div class="sidebar-header">
+                        <Link to="/" className="driverTitle"><h2>EasyDrive</h2></Link>
                         <h6>Hi {userName}</h6>
                     </div>
                     <ul class="list-unstyled components">
@@ -71,7 +83,7 @@ const Dashboard = () => {
                                 <Link to="/your-cars"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Your Vahicals</Link>
                             </li>
                             <li>
-                                <Link to="/your-cars"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Buy Old Car</Link>
+                                <Link to="/your-cars"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Income</Link>
                             </li>
                         </li>
                         <li>
@@ -101,11 +113,129 @@ const Dashboard = () => {
                         </div>
                     </nav>
 
+
+
                     <div className="container-fluid">
                         <h1>Darshbord</h1>
                         <div className="dash_main">
-                            <div className="item_client">
-                                <h5>User</h5>
+                            <div className="row">
+
+                                <div className="col mx-2 d-flex item_client">
+                                    <div>
+
+                                        <h5>Users</h5>
+                                        <p>500+</p>
+                                    </div>
+                                    <div>
+                                        <img src="myImage/users2.png" alt="" />
+                                    </div>
+                                </div>
+
+                                <div className="col mx-2 d-flex driver_item">
+                                    <div>
+
+                                        <h5>Drivers</h5>
+                                        <p>50+</p>
+                                    </div>
+                                    <div>
+                                        <img src="myImage/drivers.png" alt="" />
+                                    </div>
+                                </div>
+                                <div className="col  mx-2 d-flex item_service">
+                                    <div>
+
+                                        <h5>Sevices</h5>
+                                        <p>2</p>
+                                    </div>
+                                    <div>
+                                        <img src="myImage/service.png" alt="" />
+                                    </div>
+                                </div>
+                                <div className="col mx-2 d-flex item_third">
+                                    <div>
+
+                                        <h5>Booking</h5>
+                                        <p>10+</p>
+                                    </div>
+                                    <div>
+                                        <img src="myImage/booking.png" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div className="online_status mt-4">
+                            <div className="row">
+                                <div className="col online-btn">
+
+                                    <button onClick={driverOnlineAndOfflineHander} className={`${online ? 'active_green' : 'deactive_red'}`} >
+                                        {online ?
+                                            "Online Car"
+                                            : "offline car"}
+
+
+                                    </button>
+                                </div>
+                                {/* {online ? 
+                                <div className="col online-btn">
+
+                                    <button onClick={driverOnlineAndOfflineHander}> ONLINE CAR</button>
+                                </div>
+                                :
+                                <div className="col offine-btn">
+                                    <button onClick={driverOnlineAndOfflineHander}> OFFLINE CAR</button>
+                                </div>
+                                } */}
+                            </div>
+
+                        </div>
+                        <div className="online_suggeest mt-2">
+                            <div className="row green_online">
+                                <li className="box"></li>
+                                <li>Your car is online for rent.</li>
+
+                            </div>
+                            <div className="row red_online">
+                                <li className="box2"></li>
+                                <li>Your car is offline anyone not take rent.</li>
+
+                            </div>
+
+                        </div>
+                        <div className="Recently_booking">
+                            <div className="row">
+                                <h5>Recently Booking</h5>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First</th>
+                                            <th scope="col">Last</th>
+                                            <th scope="col">Handle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

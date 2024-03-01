@@ -1,6 +1,6 @@
 import React from 'react'
 import './index.scss'
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
@@ -58,7 +58,7 @@ export default function NavberNew() {
                             <li>
                                 <Link to="/help">Help</Link>
                             </li>
-{/* 
+                            {/* 
                             <Link to="/register">
                                 <button className="btn">Register</button>
                             </Link>

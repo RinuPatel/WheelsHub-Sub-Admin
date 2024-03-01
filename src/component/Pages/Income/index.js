@@ -1,12 +1,11 @@
+import React from 'react'
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import { useEffect } from "react"
+import FetchApi from '../../../constants/FetchApi'
 
-import './index.css'
-import { useState, useEffect, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import 'react-image-crop/dist/ReactCrop.css';
-import FetchApi from '../constants/FetchApi';
-import NavbarTopFirst from '../NavbarTopFirst';
-function Navbar({ statusCount }) {
-    const location = useState()
+export default function Income() {
+
     const [isSidebarActive, setIsSidebarActive] = useState(false);
     const [isCollapsed, setCollapsed] = useState(false);
     const [userName, setUserName] = useState("")
@@ -47,11 +46,10 @@ function Navbar({ statusCount }) {
     }, [])
     return (
         <>
-            {/* <NavbarTopFirst /> */}
             <div class="wrapper">
                 <nav id="sidebar" className={isSidebarActive ? 'active' : ''}>
                     <div class="sidebar-header">
-                    <Link to="/" className="driverTitle"><h2>EasyDrive</h2></Link>
+                        <Link to="/" className="driverTitle"><h2>EasyDrive</h2></Link>
                         <h6>Hi {userName}</h6>
                     </div>
                     <ul class="list-unstyled components">
@@ -113,4 +111,3 @@ function Navbar({ statusCount }) {
         </>
     )
 }
-export default Navbar;
