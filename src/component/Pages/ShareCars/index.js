@@ -10,7 +10,7 @@ import FetchApi from '../../../constants/FetchApi';
 import AppConfig from '../../../constants/AppConfig';
 import SuccessPopup from '../../SucessPopup';
 import { useNavigate } from 'react-router-dom';
-import { MDBInputGroup, MDBInput, MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
+
 
 function ShareCars() {
 
@@ -202,11 +202,11 @@ function ShareCars() {
               <Link to="/your-cars"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Your Vahicals</Link>
             </li>
             <li>
-              <Link to="/"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />income</Link>
+              <Link to="/income"><img src="myImage/coin.svg" alt="" className='mx-2' />income</Link>
             </li>
             <li>
 
-              <Link to="#"><img src="myImage/person-fill.svg" alt="" className='mx-2' />Account</Link>
+              <Link to="/account-driver"><img src="myImage/person-fill.svg" alt="" className='mx-2' />Account</Link>
 
             </li>
             <li>

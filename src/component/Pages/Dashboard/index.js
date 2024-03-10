@@ -11,6 +11,9 @@ const Dashboard = () => {
     const [userName, setUserName] = useState("")
     const [peddingCount, setPeddingCount] = useState()
     const [online, setOnline] = useState(true)
+    const [clientCounter, setClientCounter] = useState("");
+    const [driverCounter, setDriverCounter] = useState("")
+    const [recentlyBooking, setRecentlyBooking] = useState([])
 
     const handleToggle = () => {
         setCollapsed(!isCollapsed);
@@ -38,19 +41,76 @@ const Dashboard = () => {
             }
             console.log("my pedding");
 
+            const resData = await FetchApi("user-couter", "", {
+                method: "GET"
+            })
+            if (resData.status === 200) {
+                setClientCounter(resData.client)
+                setDriverCounter(resData.driver)
+            }
+            console.log("my user couter api call ===>", resData);
+
+
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const handlerRecentlyBooking = async () => {
+        try {
+            const bookingRes = await FetchApi("recetly-booking", "", {
+                method: "GET"
+            })
+            if (bookingRes.status === 200) {
+                setRecentlyBooking(bookingRes.bookings)
+                console.log(bookingRes.bookings);
+                // console.log("my booking recetly", recentlyBooking);
+            }
         } catch (error) {
             console.log(error);
         }
     }
 
-    const driverOnlineAndOfflineHander = () => {
-        try {
-            setOnline(prevStatus => !prevStatus)
-        } catch (error) {
+    // Fetch initial online/offline status of all cars when the component mounts
+    useEffect(() => {
+        async function fetchInitialStatus() {
+            try {
+                const resData = await FetchApi("get-statuscar", "", {
+                    method: "GET"
+                });
+                // Check if any car is online, and update the button state accordingly
+                const anyCarOnline = resData.data.some(element => element.onStatus === "Online");
+                console.log("my car is status", anyCarOnline);
+                setOnline(anyCarOnline);
 
+
+            } catch (error) {
+                console.error("Error fetching initial status:", error);
+            }
+        }
+
+        fetchInitialStatus();
+        handlerRecentlyBooking();
+    }, []);
+    const handlerOfflineAndOnline = async (status) => {
+        const newStatus = online ? "Offline" : "Online";
+        try {
+
+            const statusObj = { onStatus: newStatus };
+            const res = await FetchApi("online-offline-car", statusObj, {
+                method: "PATCH"
+            })
+            setOnline(!online);
+            console.log("my function", res);
+
+        } catch (error) {
+            console.log(error);
         }
     }
-
+    useEffect(() => {
+        console.log("my booking recently:", recentlyBooking);
+    }, [recentlyBooking]);
 
     useEffect(() => {
         handleCheckAuth()
@@ -83,12 +143,12 @@ const Dashboard = () => {
                                 <Link to="/your-cars"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Your Vahicals</Link>
                             </li>
                             <li>
-                                <Link to="/your-cars"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Income</Link>
+                                <Link to="/income"><img src="myImage/coin.svg" alt="" className='mx-2' />Income</Link>
                             </li>
                         </li>
                         <li>
                             <li>
-                                <Link to="#"><img src="myImage/person-fill.svg" alt="" className='mx-2' />Account</Link>
+                                <Link to="/account-driver"><img src="myImage/person-fill.svg" alt="" className='mx-2' />Account</Link>
                             </li>
                         </li>
                         <li>
@@ -97,6 +157,7 @@ const Dashboard = () => {
 
                     </ul>
                 </nav>
+
                 <div id="content">
                     <nav className="navbar navbar-expand-lg  bg-light container-fluid"  >
                         <div class="">
@@ -124,7 +185,7 @@ const Dashboard = () => {
                                     <div>
 
                                         <h5>Users</h5>
-                                        <p>500+</p>
+                                        <p>{clientCounter}+</p>
                                     </div>
                                     <div>
                                         <img src="myImage/users2.png" alt="" />
@@ -135,7 +196,7 @@ const Dashboard = () => {
                                     <div>
 
                                         <h5>Drivers</h5>
-                                        <p>50+</p>
+                                        <p>{driverCounter}+</p>
                                     </div>
                                     <div>
                                         <img src="myImage/drivers.png" alt="" />
@@ -170,24 +231,13 @@ const Dashboard = () => {
                             <div className="row">
                                 <div className="col online-btn">
 
-                                    <button onClick={driverOnlineAndOfflineHander} className={`${online ? 'active_green' : 'deactive_red'}`} >
-                                        {online ?
-                                            "Online Car"
-                                            : "offline car"}
-
+                                    <button onClick={handlerOfflineAndOnline} className={`${online ? 'active_green' : 'deactive_red'}`} >
+                                        {online ? 'Online Car' : 'Offline Car'}
 
                                     </button>
-                                </div>
-                                {/* {online ? 
-                                <div className="col online-btn">
 
-                                    <button onClick={driverOnlineAndOfflineHander}> ONLINE CAR</button>
                                 </div>
-                                :
-                                <div className="col offine-btn">
-                                    <button onClick={driverOnlineAndOfflineHander}> OFFLINE CAR</button>
-                                </div>
-                                } */}
+
                             </div>
 
                         </div>
@@ -210,30 +260,39 @@ const Dashboard = () => {
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">From</th>
+                                            <th scope="col">PickupDate</th>
+                                            <th scope="col">PickupTime</th>
+                                            <th scope="col">DropDate</th>
+                                            <th scope="col">DropTime</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">TotalPrice</th>
+                                            <th scope="col">CustomerPhone</th>
+                                            <th scope="col">Vehical</th>
+
                                         </tr>
                                     </thead>
+
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
+                                    {recentlyBooking.map((items, index) => (                                            <>
+                                                <tr key={index}>
+                                                    <th scope="row">{index + 1}</th>
+                                                    <td>{items.from}</td>
+                                                    <td>{items.pickupDate.slice(0,10)}</td>
+                                                    <td>{items.pickupTime}</td>
+                                                    <td>{items.DropDate.slice(0,10)}</td>
+                                                    <td>{items.dropTime}</td>
+                                                    <td>{items.price}</td>
+                                                    <td>{items.totalPrice}</td>
+                                                    <td>{items.phoneNo}</td>
+                                                    <td>{items.vehicalNo}</td>
+                                                </tr>
+
+                                            </>
+                                        ))}
+
+
                                     </tbody>
                                 </table>
                             </div>

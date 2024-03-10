@@ -86,12 +86,12 @@ const YourCars = () => {
                                 <Link to="/your-cars"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Your Vahicals</Link>
                             </li>
                             <li>
-                                <Link to="/your-cars"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Income</Link>
+                                <Link to="/income"><img src="myImage/coin.svg" alt="" className='mx-2' />Income</Link>
                             </li>
                         </li>
                         <li>
                             <li>
-                                <Link to="#"><img src="myImage/person-fill.svg" alt="" className='mx-2' />Account</Link>
+                                <Link to="/account-driver"><img src="myImage/person-fill.svg" alt="" className='mx-2' />Account</Link>
                             </li>
                         </li>
                         <li>

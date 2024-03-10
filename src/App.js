@@ -22,8 +22,9 @@ import PanCard from './component/Pages/LoginDetails/PanCard';
 import Inbox from './component/Pages/Inbox';
 import YourCars from './component/Pages/YourCars';
 import Dashboard from './component/Pages/Dashboard';
-// import SideNavber from './Modules/SideNavMenu';
-// import Navbar from './Navbar';
+import Income from './component/Pages/Income';
+import Account from './component/Pages/Account';
+
 
 function App() {
   return (
@@ -53,7 +54,8 @@ function App() {
               <Route path="/inbox" element={<Inbox/>}/>
               <Route path="/your-cars" element={<YourCars/>} />
               <Route path="/dashboard" element={<Dashboard/>}/>
-              {/* <Route path="/side-nav" element={<SideNavber/>}/> */}
+              <Route path='/income' element={<Income/>}/>
+              <Route path='/account-driver' element={<Account/>}/>
               
             </Routes>
           </div>

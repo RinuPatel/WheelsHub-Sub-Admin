@@ -3,6 +3,10 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
 import FetchApi from '../../../constants/FetchApi'
+import './index.css';
+import LineChartGraph from '../../../Modules/LineChartGraph'
+
+
 
 export default function Income() {
 
@@ -10,6 +14,11 @@ export default function Income() {
     const [isCollapsed, setCollapsed] = useState(false);
     const [userName, setUserName] = useState("")
     const [peddingCount, setPeddingCount] = useState()
+    const [totalBooking, setTotalBooking] = useState("")
+    const [acceptBooking, setAcceptBooking] = useState("")
+    const [cancelBooking, setCancelBooking] = useState("")
+    const [income, setIncome] = useState([])
+    const [totalIncome, setTotalIncome] = useState("")
 
     const handleToggle = () => {
         setCollapsed(!isCollapsed);
@@ -24,25 +33,64 @@ export default function Income() {
             })
             if (data.status === 200) {
                 setUserName(data.username)
-                localStorage.setItem("userName", data.username)
+                // localStorage.setItem("userName", data.username)
             }
 
             const res = await FetchApi("driver-req-status", "", {
                 method: "GET"
             })
+
             const statusCounter = res.data;
             console.log(statusCounter);
-            if (statusCounter.pending > 0) {
-                setPeddingCount(statusCounter.pending)
+            if (statusCounter) {
+                setTotalBooking(statusCounter.accepted + statusCounter.cancel)
+                setAcceptBooking(statusCounter.accepted)
+                setCancelBooking(statusCounter.cancel)
             }
-            console.log("my pedding");
+            if (statusCounter && statusCounter.pending > 0) {
+                setPeddingCount(statusCounter.pending)
+
+            }
 
         } catch (error) {
             console.log(error);
         }
     }
+    const handleIncome = async () => {
+        try {
+            const data = await FetchApi("get-income", "", {
+                method: "GET"
+            })
+
+            console.log("object", data.income);
+            const monthNames = [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ];
+            const sortedData = data.income.sort((a, b) => a.month - b.month);
+
+            const formatDataLine = sortedData.map(item => ({
+                Month: monthNames[item.month - 1],
+                income: item.totalIncome
+
+            }))
+            setIncome(formatDataLine)
+            let totalIncomes = 0;
+            formatDataLine.forEach((item) => {
+                totalIncomes += item.income;
+                setTotalIncome(totalIncomes)
+                console.log(`Month: ${item.Month}, Income: ${item.income}`);
+
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     useEffect(() => {
         handleCheckAuth()
+        handleIncome()
     }, [])
     return (
         <>
@@ -71,12 +119,12 @@ export default function Income() {
                                 <Link to="/your-cars"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Your Vahicals</Link>
                             </li>
                             <li>
-                                <Link to="/income"><img src="myImage/car-front-fill.svg" alt="" className='mx-2' />Income</Link>
+                                <Link to="/income"><img src="myImage/coin.svg" alt="" className='mx-2' />Income</Link>
                             </li>
                         </li>
                         <li>
                             <li>
-                                <Link to="#"><img src="myImage/person-fill.svg" alt="" className='mx-2' />Account</Link>
+                                <Link to="/account-driver"><img src="myImage/person-fill.svg" alt="" className='mx-2' />Account</Link>
                             </li>
                         </li>
                         <li>
@@ -85,6 +133,7 @@ export default function Income() {
 
                     </ul>
                 </nav>
+
                 <div id="content">
                     <nav className="navbar navbar-expand-lg  bg-light container-fluid"  >
                         <div class="">
@@ -100,12 +149,34 @@ export default function Income() {
                             </button>
                         </div>
                     </nav>
-                    <div className='search_group'>
-                        <div class="header__search">
-                            <input type="search" placeholder="Search" class="header__input" />
+                    <div className='container-fluid'>
+                        <div className='row mt-4 booking_status'>
+                            <div className="col booking_car1 mx-2">
+                                <h5>Total Income</h5>
+                                <p>{totalIncome}</p>
+                            </div>
+                            <div className="col booking_car1 mx-2">
+                                <h5>Total Booking</h5>
+                                <p>{totalBooking}</p>
+                            </div>
+                            <div className="col booking_car1 mx-2">
+                                <h5>Accepted</h5>
+                                <p>{acceptBooking}</p>
+                            </div>
+                            <div className="col booking_car1 mx-2">
+                                <h5>Cancel</h5>
+                                <p>{cancelBooking}</p>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="incomegraph">
 
+                                <LineChartGraph data={income} />
+
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </>

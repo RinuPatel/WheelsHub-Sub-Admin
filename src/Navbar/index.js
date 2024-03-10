@@ -78,7 +78,7 @@ function Navbar({ statusCount }) {
                         </li>
                         <li>
                             <li>
-                                <Link to="#"><img src="myImage/person-fill.svg" alt="" className='mx-2' />Account</Link>
+                                <Link to="/account-driver"><img src="myImage/person-fill.svg" alt="" className='mx-2' />Account</Link>
                             </li>
                         </li>
                         <li>
